@@ -33,6 +33,7 @@ install_luarocks() {
 }
 
 install_rocks() {
+./.luarocks/bin/luarocks install lbase64 20120807-3
   ./.luarocks/bin/luarocks install luasocket
   RET=$?; if [ $RET -ne 0 ];
     then echo "Error. Exiting."; exit $RET;
@@ -110,6 +111,6 @@ else
     echo "Run $0 install"
     exit 1
   fi
-
+  rm -r ../.telegram-cli/state #Prevent tg from crash 
   ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/seedbot.lua -l 1 -E $@
 fi
